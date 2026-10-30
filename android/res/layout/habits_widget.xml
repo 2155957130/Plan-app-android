@@ -1,0 +1,16 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_root" android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:padding="16dp" android:background="@drawable/widget_lilac">
+  <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical">
+    <ImageView android:layout_width="26dp" android:layout_height="26dp" android:src="@drawable/icon" android:contentDescription="Plan" />
+    <TextView android:id="@+id/widget_title" android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:layout_marginStart="8dp" android:text="习惯打卡" android:textSize="16sp" android:textStyle="bold" android:textColor="#293E34" android:maxLines="1" android:ellipsize="end" />
+    <TextView android:id="@+id/widget_refresh" android:layout_width="40dp" android:layout_height="40dp" android:gravity="center" android:text="↻" android:textSize="24sp" android:textColor="#526C53" android:contentDescription="刷新小组件" />
+  </LinearLayout>
+  <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="8dp">
+    <TextView android:id="@+id/widget_date" android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:text="Plan" android:textSize="11sp" android:textColor="#536454" android:maxLines="1" />
+    <TextView android:id="@+id/widget_summary" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="已完成 0 / 0" android:textSize="11sp" android:textColor="#536454" />
+  </LinearLayout>
+  <LinearLayout android:id="@+id/widget_rows" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" />
+  <TextView android:id="@+id/widget_empty" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:minHeight="36dp" android:gravity="center_vertical" android:text="今天暂无打卡" android:textSize="13sp" android:textColor="#536454" />
+  <TextView android:id="@+id/widget_more" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingTop="6dp" android:text="打开 Plan  ›" android:textSize="11sp" android:textColor="#526C53" />
+</LinearLayout>

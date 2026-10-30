@@ -1,0 +1,17 @@
+build/
+dist/
+*.keystore
+local.properties
+node_modules/
+local-only/
+*.apk
+*.zip
+*.bundle
+plan-backup*.json
+*.jks
+*.p12
+*.pfx
+*.key
+.env
+.env.*
+!.env.example

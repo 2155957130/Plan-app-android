@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#e8efe4">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'">
+  <title>Plan</title>
+  <link rel="icon" href="logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="expansion.css">
+  <link rel="stylesheet" href="theme.css">
+  <script type="module" src="app.mjs"></script>
+</head>
+<body>
+  <svg class="svg-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="4"/><path d="m8 9 1 1 2-2m2 1h3M8 15h2m3 0h3"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="4"/><path d="M7 3v4m10-4v4M3 11h18m-13 4h.01m4 0h.01m4 0h.01m-8 3h.01m4 0h.01"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M9 6V3h6v3M5 6l1 15h12l1-15M10 10v7m4-7v7"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="3"/><circle cx="15" cy="17" r="3"/></symbol>
+    <symbol id="i-paw" viewBox="0 0 24 24"><path d="M7 14c-2 2-3 5 0 6 2 1 3-1 5-1s3 2 5 1c3-1 2-4 0-6-3-4-7-4-10 0Z"/><ellipse cx="5" cy="9" rx="2" ry="3"/><ellipse cx="10" cy="5" rx="2" ry="3"/><ellipse cx="16" cy="5" rx="2" ry="3"/><ellipse cx="21" cy="10" rx="2" ry="3"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></symbol>
+  </defs></svg>
+  <div class="shell">
+    <aside class="sidebar">
+      <a class="brand" href="#todo" aria-label="Plan 待办首页"><img src="logo.svg" width="44" height="44" alt="狗爪旗帜"><span>Plan<span class="brand-dot">.</span></span></a>
+      <nav class="desktop-nav" aria-label="主导航">
+        <button data-view="todo" class="nav-item active"><svg><use href="#i-list"/></svg>待办<span class="nav-count" id="nav-count">0</span></button>
+        <button data-view="habits" class="nav-item"><svg><use href="#i-paw"/></svg>打卡</button>
+        <button data-view="calendar" class="nav-item"><svg><use href="#i-calendar"/></svg>日历</button>
+        <button data-view="mine" class="nav-item"><svg><use href="#i-user"/></svg>我的</button>
+      </nav>
+    </aside>
+    <main>
+      <header class="topbar"><span class="breadcrumb">我的空间 <span>/</span> <b id="view-name">待办</b></span><a class="mobile-brand brand" href="#todo"><img src="logo.svg" width="34" height="34" alt="狗爪旗帜"><span>Plan.</span></a><div class="top-actions"><span class="today-label" id="top-date"></span><button class="icon-button" id="settings" aria-label="设置"><svg><use href="#i-settings"/></svg></button><span class="avatar" aria-label="我的"><svg><use href="#i-paw"/></svg></span></div></header>
+      <div class="page-content">
+        <section class="stats" aria-label="计划概览">
+          <div class="stat"><span class="stat-icon sage"><svg><use href="#i-list"/></svg></span><div><span class="stat-label">待完成</span><div><strong id="stat-open">0</strong></div></div></div>
+          <div class="stat"><span class="stat-icon sand"><svg><use href="#i-calendar"/></svg></span><div><span class="stat-label">今天</span><div><strong id="stat-today">0</strong></div></div></div>
+          <div class="stat"><span class="stat-icon lilac"><svg><use href="#i-check"/></svg></span><div><span class="stat-label">已完成</span><div><strong id="stat-done">0</strong></div></div></div>
+        </section>
+        <section id="todo-view" class="view">
+          <div class="section-heading"><div><h2>待办 <span class="heading-count" id="heading-count">0</span></h2></div><button class="primary" id="add-task"><svg><use href="#i-plus"/></svg>添加待办</button></div>
+          <div class="todo-layout"><div class="task-panel"><div class="filters" role="tablist" aria-label="待办筛选"><button class="filter active" data-filter="all" role="tab" aria-selected="true">全部待办 <span id="filter-count">0</span></button><button class="filter" data-filter="today" role="tab" aria-selected="false">今天</button><button class="filter" data-filter="done" role="tab" aria-selected="false">已完成 <span id="done-count">0</span></button></div><div id="tag-filter" class="tag-filter hidden" role="group" aria-label="按标签筛选"></div><div id="task-list" class="task-list"></div></div>
+          <aside class="today-card"><div class="today-card-head"><span>今天</span><svg><use href="#i-calendar"/></svg></div><div class="date-large" id="today-number"></div><div class="today-weekday" id="today-weekday"></div><div class="mini-divider"></div><div class="progress-label"><span>今日完成度</span><b id="today-percent">0%</b></div><div class="progress-track"><div id="progress-fill"></div></div><button class="text-button" id="jump-today">查看日程 <svg><use href="#i-chevron"/></svg></button><div class="card-corner-paw"><svg><use href="#i-paw"/></svg></div></aside></div>
+        </section>
+        <section id="habits-view" class="view hidden">
+          <div class="section-heading"><div><h2>打卡</h2></div><button class="primary" id="add-habit"><svg><use href="#i-plus"/></svg>添加习惯</button></div>
+          <div class="habit-summary"><span id="habit-summary"></span><span id="habit-date"></span></div>
+          <div id="habit-list" class="habit-list"></div>
+        </section>
+        <section id="calendar-view" class="view hidden">
+          <div class="section-heading"><div><h2>日历</h2></div><button class="primary" id="add-calendar"><svg><use href="#i-plus"/></svg>添加日程</button></div>
+          <div class="calendar-layout"><div class="calendar-card"><div class="calendar-header"><h3 id="month-label"></h3><div><button class="text-button" id="calendar-today">今天</button><button class="icon-button prev" id="prev-month" aria-label="上个月"><svg><use href="#i-chevron"/></svg></button><button class="icon-button" id="next-month" aria-label="下个月"><svg><use href="#i-chevron"/></svg></button></div></div><div class="weekdays"><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span></div><div class="calendar-grid" id="calendar-grid"></div><div class="calendar-legend"><span class="tiny-dot"></span>有未完成安排 <span class="outlined-dot"></span>今天</div></div><div class="agenda-card"><div class="agenda-heading"><div><div id="selected-weekday" class="eyebrow"></div><h3 id="selected-date"></h3></div><button class="icon-button" id="add-selected" aria-label="在选中日期添加日程"><svg><use href="#i-plus"/></svg></button></div><div class="timeline-caption"><span>时间线</span><span id="timeline-count"></span></div><div class="timeline-return"><button id="back-month" class="text-button"><svg><use href="#i-calendar"/></svg>返回月历</button></div><div id="agenda-list" aria-label="当天时间线"></div></div></div>
+        </section>
+        <section id="mine-view" class="view hidden">
+          <div class="section-heading"><div><h2>我的</h2></div></div>
+          <div class="mine-stats"><div class="mine-stat"><strong id="mine-week">0%</strong><span>待办完成率</span><div class="mine-progress"><div id="mine-week-bar"></div></div><p id="mine-week-line"></p></div><div class="mine-stat"><div class="mine-habit-tabs" id="mine-habit-tabs" role="tablist" aria-label="切换习惯"></div><strong id="mine-habit-streak">—</strong><span id="mine-streak-label">习惯坚持天数</span></div></div>
+          <div class="widgets-heading"><h3>桌面小组件</h3><button class="text-button" id="widget-help" aria-label="小组件使用方法">使用方法</button></div>
+          <div class="widget-gallery">
+            <article class="widget-option">
+              <div class="widget-preview widget-preview-todo"><div class="widget-preview-head"><img src="logo.svg" width="25" height="25" alt=""><strong>今日待办</strong><span class="widget-size">4 × 3</span></div><div class="widget-preview-summary" id="widget-todo-summary"></div><div id="widget-todo-rows" class="widget-preview-rows"></div></div>
+              <button class="widget-add" data-pin-widget="todo"><svg><use href="#i-plus"/></svg>添加到桌面</button>
+            </article>
+            <article class="widget-option">
+              <div class="widget-preview widget-preview-habits"><div class="widget-preview-head"><svg><use href="#i-paw"/></svg><strong>习惯打卡</strong><span class="widget-size">4 × 3</span></div><div class="widget-preview-summary" id="widget-habits-summary"></div><div id="widget-habits-rows" class="widget-preview-rows"></div></div>
+              <button class="widget-add" data-pin-widget="habits"><svg><use href="#i-plus"/></svg>添加到桌面</button>
+            </article>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+  <nav class="bottom-nav" aria-label="手机主导航"><button data-view="todo" class="active"><svg><use href="#i-list"/></svg><span>待办</span></button><button data-view="habits"><svg><use href="#i-paw"/></svg><span>打卡</span></button><button data-view="calendar"><svg><use href="#i-calendar"/></svg><span>日历</span></button><button data-view="mine"><svg><use href="#i-user"/></svg><span>我的</span></button></nav>
+  <dialog id="habit-dialog" class="sheet"><form id="habit-form"><div class="sheet-handle"></div><div class="dialog-heading"><div><h2 id="habit-form-heading">添加习惯</h2></div><button type="button" class="icon-button" data-close="habit-dialog" aria-label="关闭习惯表单"><svg><use href="#i-close"/></svg></button></div><label class="form-label" for="habit-title">习惯名称 <span>*</span></label><input id="habit-title" maxlength="120" placeholder="习惯名称" required autocomplete="off"><label class="form-label" for="habit-frequency">打卡频率</label><select id="habit-frequency"><option value="daily">每天</option><option value="workdays">工作日（周一至周五）</option><option value="custom">自选每周打卡日</option><option value="interval">每间隔几天</option><option value="monthly">每月</option><option value="yearly">每年</option></select><div class="interval-options hidden" id="interval-options"><input type="number" id="habit-interval" min="1" max="365" step="1" inputmode="numeric" value="2" aria-label="间隔天数"><span>天一次（从开始日期起算）</span></div><div class="calendar-frequency-options hidden" id="calendar-frequency-options"><div id="habit-month-field"><label class="form-label" for="habit-year-month">月份</label><select id="habit-year-month"><option value="1">1 月</option><option value="2">2 月</option><option value="3">3 月</option><option value="4">4 月</option><option value="5">5 月</option><option value="6">6 月</option><option value="7">7 月</option><option value="8">8 月</option><option value="9">9 月</option><option value="10">10 月</option><option value="11">11 月</option><option value="12">12 月</option></select></div><div><label class="form-label" for="habit-month-day">日期</label><select id="habit-month-day"></select></div></div><p class="field-hint" id="habit-frequency-hint"></p><fieldset class="day-picker"><legend class="sr-only">每周打卡日</legend><label><input type="checkbox" value="1"><span>一</span></label><label><input type="checkbox" value="2"><span>二</span></label><label><input type="checkbox" value="3"><span>三</span></label><label><input type="checkbox" value="4"><span>四</span></label><label><input type="checkbox" value="5"><span>五</span></label><label><input type="checkbox" value="6"><span>六</span></label><label><input type="checkbox" value="0"><span>日</span></label></fieldset><label class="form-label" for="habit-time">打卡时间</label><input id="habit-time" type="time" required><label class="remind-toggle" for="habit-remind"><span><strong>打卡提醒</strong></span><input type="checkbox" id="habit-remind"></label><p class="field-hint" id="habit-reminder-hint"></p><p id="habit-form-error" class="form-error" role="alert"></p><div class="form-actions"><button type="button" class="delete-button hidden" id="delete-habit"><svg><use href="#i-trash"/></svg>删除</button><button type="button" class="secondary" data-close="habit-dialog">取消</button><button type="submit" class="primary"><svg><use href="#i-check"/></svg>保存习惯</button></div></form></dialog>
+  <dialog id="task-dialog" class="sheet"><form id="task-form"><div class="sheet-handle"></div><div class="dialog-heading"><div><h2 id="form-heading">添加待办</h2></div><button type="button" class="icon-button" data-close="task-dialog" aria-label="关闭"><svg><use href="#i-close"/></svg></button></div><label class="form-label" for="task-title">事件名称 <span>*</span></label><input id="task-title" maxlength="120" placeholder="事件名称" required autocomplete="off"><div class="form-row"><div><label class="form-label" for="task-date">截止日期</label><input type="date" id="task-date" min="2000-01-01" max="2100-12-31"><button type="button" class="text-button date-clear" id="clear-task-date">不设日期，一直保留</button></div><div><label class="form-label" for="task-time">时间</label><input type="time" id="task-time" disabled></div></div><div class="tag-picker-head"><span class="form-label">标签</span><button type="button" class="text-button tag-manage" id="manage-tags">管理标签</button></div><div class="tag-picker" id="task-tags-picker"></div><label class="form-label" for="task-reminder">提醒</label><div class="select-wrap"><svg><use href="#i-bell"/></svg><select id="task-reminder"><option value="-1">不提醒</option><option value="0">到时间提醒</option><option value="5">提前 5 分钟</option><option value="15">提前 15 分钟</option><option value="30">提前 30 分钟</option><option value="60">提前 1 小时</option><option value="1440">提前 1 天</option><option value="custom">自定义…</option></select></div><div class="custom-reminder hidden" id="custom-reminder"><input type="number" id="reminder-minutes" min="1" max="10080" step="1" inputmode="numeric" placeholder="分钟" aria-label="提前多少分钟提醒"><span>分钟前提醒（1–10080）</span></div><p class="field-hint" id="reminder-hint"></p><label class="form-label" for="task-notes">备注</label><textarea id="task-notes" maxlength="2000" rows="3" placeholder="备注"></textarea><p class="form-error" id="form-error" role="alert"></p><div class="form-actions"><button type="button" class="delete-button hidden" id="delete-task"><svg><use href="#i-trash"/></svg>删除</button><button type="button" class="secondary" data-close="task-dialog">取消</button><button type="submit" class="primary"><svg><use href="#i-check"/></svg>保存</button></div></form></dialog>
+  <dialog id="tag-dialog" class="sheet"><form id="tag-form"><div class="sheet-handle"></div><div class="dialog-heading"><div><h2>管理标签</h2></div><button type="button" class="icon-button" data-close="tag-dialog" aria-label="关闭标签管理"><svg><use href="#i-close"/></svg></button></div><div class="tag-manage-add"><input id="tag-new" maxlength="12" placeholder="新标签，例如 健身" autocomplete="off"><button type="submit" class="primary">添加</button></div><div class="tag-manage-list" id="tag-manage-list"></div><p class="form-error" id="tag-form-error" role="alert"></p></form></dialog>
+  <dialog id="settings-dialog" class="sheet settings-sheet"><div class="sheet-handle"></div><div class="dialog-heading"><div><h2>设置</h2></div><button class="icon-button" data-close="settings-dialog" aria-label="关闭设置"><svg><use href="#i-close"/></svg></button></div><div id="settings-content"></div></dialog>
+  <dialog id="widget-dialog" class="sheet"><div class="sheet-handle"></div><div class="dialog-heading"><h2>桌面小组件</h2><button class="icon-button" data-close="widget-dialog" aria-label="关闭小组件说明"><svg><use href="#i-close"/></svg></button></div><ol class="widget-instructions"><li>选择小组件，点「添加到桌面」。</li><li>在手机弹窗中确认添加。</li><li>点击桌面上的事项，进入 Plan 查看或打卡。</li></ol><p class="widget-help-note">也可长按手机桌面空白处 → 小组件 → Plan。</p><p class="widget-help-note" id="widget-platform-note"></p></dialog>
+  <dialog id="confirm-dialog" class="sheet confirm-sheet"><h2 id="confirm-title">删除待办？</h2><p id="confirm-description">删除后无法恢复，也会取消对应提醒。</p><div class="form-actions"><button class="secondary" data-close="confirm-dialog">取消</button><button class="danger" id="confirm-delete">删除</button></div></dialog>
+  <div class="toast hidden" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
