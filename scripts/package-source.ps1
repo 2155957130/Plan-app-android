@@ -9,7 +9,7 @@ foreach ($directory in @('android','scripts','tests')) {
   if ($children | Where-Object { $_.Attributes -band [IO.FileAttributes]::ReparsePoint }) { throw 'Source files must not be links' }
   $sourceFiles += @($children | Where-Object { -not $_.PSIsContainer })
 }
-foreach ($file in @('README.md','package.json','.gitignore','.gitattributes')) {
+foreach ($file in @('README.md','LICENSE','package.json','.gitignore','.gitattributes')) {
   $sourceFiles += Get-Item -LiteralPath (Join-Path $sourceRoot $file)
 }
 $blockedFilePattern = '(?i)(\.(apk|zip|bundle|keystore|jks|p12|pfx|key)$|(^|/)(\.git|\.github|build|docs|local-only|node_modules)/|(^|/)\.env($|\.)|(^|/)plan-backup.*\.json$)'

@@ -2,6 +2,8 @@
   "name": "plan-android",
   "private": true,
   "version": "1.5.0",
+  "license": "MIT",
+  "repository": {"type": "git", "url": "https://github.com/2155957130/Plan-app-android.git"},
   "description": "Plan：离线安卓待办、习惯打卡与日历应用",
   "type": "module",
   "scripts": {

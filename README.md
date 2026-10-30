@@ -1,6 +1,10 @@
 # Plan
 
-简约的安卓离线计划应用，当前版本 **1.5.0**，支持 **Android 8.0 及以上**。使用带狗爪的小旗子图标，底部导航依次为待办、打卡、日历、我的。
+[下载最新版 APK](https://github.com/2155957130/Plan-app-android/releases/latest/download/Plan.apk) · [版本发布](https://github.com/2155957130/Plan-app-android/releases)
+
+一款简约的安卓离线计划应用，无需注册，数据保存在本机，支持待办管理提醒、习惯打卡、日历时间线和桌面小组件。
+
+当前版本 **1.5.0**，支持 **Android 8.0 及以上**。使用带狗爪的小旗子图标，底部导航依次为待办、打卡、日历、我的。
 
 ## 功能
 
@@ -75,7 +79,7 @@ powershell -ExecutionPolicy Bypass -File scripts/build.ps1 -SdkPath "$env:LOCALA
 
 首次构建生成本地开发签名 `build/plan-local.keystore`，之后重复使用。请自行备份密钥，以支持覆盖升级；不要上传密钥。使用不同密钥编译的 APK 无法覆盖原签名安装包。APK 和密钥均已被 Git 忽略。
 
-## 整理并手动上传源码
+## 打包源码
 
 ```powershell
 npm run package:source
@@ -83,6 +87,8 @@ npm run package:source
 
 生成根目录的 `Plan-source.zip`，仅打包上述源码、脚本、测试和项目说明，不包含官网、APK、签名密钥、构建缓存、个人记录、环境文件或 Git 历史。
 
-手动上传时，解压 `Plan-source.zip`，把其中 `Plan` 目录里的文件上传到你自己创建的 GitHub 仓库。不要只上传整个 ZIP 作为仓库的唯一文件。创建仓库时无需添加 Pages 或部署配置。
+源码包可用于本地备份和源码分发。APK 请从仓库 Releases 下载。
 
-工作目录中如有 `local-only/`，它只保存本地的官网和旧历史备份，不属于上传内容。请保留本地 `build/plan-local.keystore` 与 `build/acl-recovery/`；其他编译输出可以重新生成。
+## 许可证
+
+本项目使用 [MIT License](LICENSE)。
